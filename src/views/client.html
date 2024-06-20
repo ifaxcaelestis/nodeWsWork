@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <input type="text" id="msg">
+  <button id="send" onclick="ws.send(document.getElementById('msg').value)">发送</button>
+  <script>
+    var ws = new WebSocket('ws://localhost:8080');
+
+    ws.onopen = function() {
+      console.log('连接服务器成功！');
+      ws.send('你好，服务器！');
+    };
+
+    ws.onmessage = function(evt) {
+      console.log('收到服务器消息：' + evt.data);
+    };
+
+    ws.onclose = function() {
+      console.log('与服务器断开连接');
+    };
+
+    ws.onerror = function(err) {
+      console.error('连接出错：', err);
+    };
+
+    
+  </script>
+</body>
+</html>
