@@ -4,7 +4,7 @@
   <input type="text" id="msg">
   <button id="send" onclick="ws.send(document.getElementById('msg').value)">发送</button>
   <script>
-    var ws = new WebSocket('ws://localhost:8080');
+    var ws = new WebSocket('ws://localhost:3000');
 
     ws.onopen = function() {
       console.log('连接服务器成功！');

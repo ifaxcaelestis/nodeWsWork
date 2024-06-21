@@ -1,0 +1,32 @@
+
+<%- include('header.html') -%>
+<script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+<input type="text" id="msg"/>
+<br/>
+<br/>
+<button id="send1">群聊发送</button>
+<button id="send2">客服发送</button>
+
+<script>
+    $(function(){
+        var socket = io.connect('http://127.0.0.1:3000/');
+
+        // 聊天室: 群聊功能
+        $('#send1').click(function(){
+            var msg = $('#msg').val();
+            socket.emit('message1',msg);  // 客户端给服务器发送数据
+        });
+
+        // 智能客服
+        $('#send2').click(function(){
+            var msg = $('#msg').val();
+            socket.emit('message2',msg);  // 客户端给服务器发送数据
+        });
+
+        // 接受服务器返回的数据
+        socket.on('servermessage',function(data){
+            console.log(data)
+        });
+    })
+</script>
+<%- include('footer.html') -%>
